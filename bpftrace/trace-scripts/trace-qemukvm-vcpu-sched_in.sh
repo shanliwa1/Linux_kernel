@@ -5,8 +5,9 @@
 
 sudo bpftrace -e 'tracepoint:sched:sched_switch / !strncmp(args->next_comm, "qemu-system-x86", 16) / {
 	printf("\nvcpu thread sched in:\n");
-	printf("\tcurtask->on_cpu %d\n", curtask->on_cpu);
+	printf("\tnuma node id: %d\n", numaid);
+	printf("\tprocessor id: %d\n", cpu);
 	printf("\tprev_pid: %d\n", args->prev_pid);
-	printf("\tprev_comm %s\n", args->prev_comm);
+	printf("\tprev_comm: %s\n", args->prev_comm);
 	printf("\tnext_pid: %d\n", args->next_pid);
-	printf("\tnext_comm %s\n", args->next_comm)}'
+	printf("\tnext_comm: %s\n", args->next_comm)}'
